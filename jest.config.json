@@ -1,0 +1,33 @@
+{
+  "moduleDirectories": [
+    "node_modules",
+    "src"
+  ],
+  "moduleFileExtensions": [
+    "js",
+    "json",
+    "ts"
+  ],
+  "roots": [
+    "test",
+    "src"
+  ],
+  "testRegex": ".*\\.spec\\.ts$",
+  "transform": {
+    "^.+\\.(t|j)s$": "ts-jest"
+  },
+  "collectCoverageFrom": [
+    "<rootDir>/src/**/*.service.{js,jsx,ts,tsx}",
+    "!src/main.ts",
+    "!src/app.module.ts"
+  ],
+  "coverageDirectory": "test/coverage",
+  "clearMocks": true,
+  "testEnvironment": "node",
+  "transformIgnorePatterns": [
+    "/node_modules/"
+  ],
+  "moduleNameMapper": {
+    "^src/(.*)$": "<rootDir>/src/$1"
+  }
+}
