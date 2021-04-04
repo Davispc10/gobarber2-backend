@@ -5,11 +5,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppointmentModule } from './appointment/appointment.module';
+import { NotificationModule } from './notification/notification.module';
 import { SessionModule } from './session/session.module';
 import { SharedModule } from './shared/shared.module';
 import { UserModule } from './user/user.module';
-import { NotificationModule } from './notification/notification.module';
-import { NotificationModule } from './notification/notification.module';
 
 @Module({
   imports: [
