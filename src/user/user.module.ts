@@ -1,5 +1,5 @@
 import { SharedModule } from 'src/shared/shared.module';
-import { TypeOrmInfraUserModule } from 'src/user/infra/typeorm/typeorm-infra-user.module';
+import { InfraUserModule } from 'src/user/infra/typeorm/infra-user.module';
 
 import { Module } from '@nestjs/common';
 
@@ -15,7 +15,7 @@ import { UpdateAvatarService } from './services/update-avatar.service';
 import { UserService } from './services/user.service';
 
 @Module({
-  imports: [TypeOrmInfraUserModule, HashProviderModule, SharedModule],
+  imports: [InfraUserModule, HashProviderModule, SharedModule],
   controllers: [
     UserController,
     UserAvatarController,

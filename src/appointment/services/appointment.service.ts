@@ -1,4 +1,5 @@
-import { getHours, isBefore, startOfHour } from 'date-fns';
+import { format, getHours, isBefore, startOfHour } from 'date-fns';
+import { INotificationRepository } from 'src/notification/interfaces/notification.interface';
 
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 
@@ -15,6 +16,8 @@ export class AppointmentService {
   constructor(
     @Inject('IAppointmentRepository')
     private readonly appointmentRepository: IAppointmentRepository,
+    @Inject('INotificationRepository')
+    private readonly notificationRepository: INotificationRepository,
   ) {}
 
   public async create({
@@ -54,6 +57,13 @@ export class AppointmentService {
       userId,
       providerId,
       date: appointmentDate,
+    });
+
+    const dateFormatted = format(appointmentDate, "dd/MM/yyyy 'ás' HH:mm'h'");
+
+    await this.notificationRepository.create({
+      recipientId: providerId,
+      content: `Novo agendamento para dia ${dateFormatted}`,
     });
 
     return appointment;

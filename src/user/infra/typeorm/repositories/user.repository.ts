@@ -12,17 +12,17 @@ import { User } from '../entities/user.entity';
 export class UserRepository implements IUserRepository {
   constructor(
     @InjectRepository(User)
-    private readonly ormRepository: Repository<User>,
+    private readonly userRepository: Repository<User>,
   ) {}
 
   public async findById(id: string): Promise<User | undefined> {
-    const findUser = await this.ormRepository.findOne(id);
+    const findUser = await this.userRepository.findOne(id);
 
     return findUser;
   }
 
   public async findByEmail(email: string): Promise<User | undefined> {
-    const findUser = await this.ormRepository.findOne({
+    const findUser = await this.userRepository.findOne({
       where: { email },
     });
 
@@ -35,31 +35,31 @@ export class UserRepository implements IUserRepository {
     let users: User[];
 
     if (exceptUserId) {
-      users = await this.ormRepository.find({
+      users = await this.userRepository.find({
         where: {
           id: Not(exceptUserId),
         },
       });
     } else {
-      users = await this.ormRepository.find();
+      users = await this.userRepository.find();
     }
 
     return users;
   }
 
   public async create(userData: CreateUserDto): Promise<User> {
-    const user = this.ormRepository.create(userData);
+    const user = this.userRepository.create(userData);
 
-    await this.ormRepository.save(user);
+    await this.userRepository.save(user);
 
     return user;
   }
 
   public async save(user: User): Promise<User> {
-    return await this.ormRepository.save(user);
+    return await this.userRepository.save(user);
   }
 
   public async findAll(): Promise<User[]> {
-    return await this.ormRepository.find();
+    return await this.userRepository.find();
   }
 }

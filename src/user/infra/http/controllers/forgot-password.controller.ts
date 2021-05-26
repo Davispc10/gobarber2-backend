@@ -1,4 +1,5 @@
 import { Response } from 'express';
+import { ForgotPasswordDto } from 'src/user/dtos/forgot-password.dto';
 import { EmailService } from 'src/user/services/email.service';
 
 import {
@@ -17,7 +18,7 @@ export class ForgotPasswordController {
   @Post('forgot')
   @UsePipes(ValidationPipe)
   async create(
-    @Body('email') email: string,
+    @Body() { email }: ForgotPasswordDto,
     @Res() res: Response,
   ): Promise<Response> {
     console.log(email);

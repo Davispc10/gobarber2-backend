@@ -2,15 +2,22 @@ import { AppointmentService } from 'src/appointment/services/appointment.service
 
 import { BadRequestException } from '@nestjs/common';
 
+import { FakeNotificationRepository } from '../../notification/fakes/fake-notification.repository';
 import { FakeAppointmentRepository } from '../fakes/fake-appointment.repository';
 
 let fakeAppointmentRepository: FakeAppointmentRepository;
+let fakeNotificationRepository: FakeNotificationRepository;
 let appointmentService: AppointmentService;
 
 describe('AppointmentService', () => {
   beforeEach(() => {
     fakeAppointmentRepository = new FakeAppointmentRepository();
-    appointmentService = new AppointmentService(fakeAppointmentRepository);
+    fakeNotificationRepository = new FakeNotificationRepository();
+
+    appointmentService = new AppointmentService(
+      fakeAppointmentRepository,
+      fakeNotificationRepository,
+    );
   });
 
   describe('CreateAppointment', () => {

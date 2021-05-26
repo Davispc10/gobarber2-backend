@@ -5,10 +5,13 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppointmentModule } from './appointment/appointment.module';
+import { options } from './config/database.config';
 import { NotificationModule } from './notification/notification.module';
 import { SessionModule } from './session/session.module';
 import { SharedModule } from './shared/shared.module';
 import { UserModule } from './user/user.module';
+
+const [, mongoConfig] = options;
 
 @Module({
   imports: [
@@ -51,6 +54,7 @@ import { UserModule } from './user/user.module';
       }),
       inject: [ConfigService],
     }),
+    TypeOrmModule.forRoot(mongoConfig),
     UserModule,
     AppointmentModule,
     SessionModule,

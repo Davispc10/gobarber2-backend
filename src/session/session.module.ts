@@ -1,5 +1,5 @@
 import { JwtStrategy } from 'src/shared/infra/strategies/jwt.strategy';
-import { TypeOrmInfraUserModule } from 'src/user/infra/typeorm/typeorm-infra-user.module';
+import { InfraUserModule } from 'src/user/infra/typeorm/infra-user.module';
 import { HashProviderModule } from 'src/user/providers/hash-provider.module';
 
 import { Module } from '@nestjs/common';
@@ -12,7 +12,7 @@ import { SessionService } from './session.service';
 
 @Module({
   imports: [
-    TypeOrmInfraUserModule,
+    InfraUserModule,
     PassportModule,
     HashProviderModule,
     JwtModule.registerAsync({

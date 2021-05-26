@@ -20,4 +20,4 @@ import { UserRepository } from './repositories/user.repository';
   ],
   exports: ['IUserRepository', 'IUserTokensRepository'],
 })
-export class TypeOrmInfraUserModule {}
+export class InfraUserModule {}

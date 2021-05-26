@@ -14,4 +14,4 @@ import { AppointmentRepository } from './repositories/appointment.repository';
   ],
   exports: ['IAppointmentRepository'],
 })
-export class TypeOrmInfraAppointmentModule {}
+export class InfraAppointmentModule {}

@@ -1,12 +1,11 @@
-import * as path from 'path';
-import { join } from 'path';
+import { join, resolve } from 'path';
 
 import { ConfigService } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 const configService = new ConfigService();
 
-const options: TypeOrmModuleOptions[] = [
+export const options: TypeOrmModuleOptions[] = [
   {
     type: 'postgres',
     host: configService.get('DB_HOST'),
@@ -14,12 +13,12 @@ const options: TypeOrmModuleOptions[] = [
     username: configService.get('DB_USERNAME'),
     password: configService.get('DB_PASSWORD'),
     database: configService.get('DB_DBNAME'),
-    entities: [join(__dirname, '..', '**', '*.entity.{ts,js}')],
-    logging: true,
-    synchronize: true,
+    entities: [join(__dirname, '**', '*.entity.{ts,js}')],
+    logging: false,
+    synchronize: false,
     // migrationsRun: true,
     migrations: [
-      path.resolve(
+      resolve(
         __dirname,
         '..',
         'shared',
@@ -30,7 +29,7 @@ const options: TypeOrmModuleOptions[] = [
       ),
     ],
     cli: {
-      migrationsDir: path.resolve(
+      migrationsDir: resolve(
         __dirname,
         '..',
         'shared',
@@ -47,8 +46,6 @@ const options: TypeOrmModuleOptions[] = [
     port: configService.get('MONGO_PORT'),
     database: configService.get('MONGO_DBNAME'),
     useUnifiedTopology: true,
-    entities: [join(__dirname, '..', '**', '*.entity.{ts,js}')],
+    entities: [join(__dirname, '..', '**', 'schemas', '*.schema.{ts,js}')],
   },
 ];
-
-module.exports = options;
