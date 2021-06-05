@@ -2,6 +2,7 @@ import { resolve } from 'path';
 import { IMailProvider } from 'src/shared/providers/mailProvider/models/mail.provider';
 
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 import { IMailRequest } from '../interfaces/mail.interface';
 import {
@@ -18,6 +19,8 @@ export class EmailService {
     private readonly mailProvider: IMailProvider,
     @Inject('IUserTokensRepository')
     private readonly userTokenRepository: IUserTokensRepository,
+    @Inject('ConfigService')
+    private readonly configService: ConfigService,
   ) {}
 
   async sendForgotPasswordEmail({ email }: IMailRequest): Promise<void> {
@@ -46,7 +49,9 @@ export class EmailService {
         file: forgotPasswordTemplate,
         variables: {
           name: user.name,
-          link: `http://localhost:3333/reset_password?token=${token}`,
+          link: `${this.configService.get(
+            'APP_WEB_URL',
+          )}/reset_password?token=${token}`,
         },
       },
     });

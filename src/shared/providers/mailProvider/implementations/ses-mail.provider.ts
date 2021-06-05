@@ -1,9 +1,6 @@
-import {
-  Transporter,
-  createTestAccount,
-  createTransport,
-  getTestMessageUrl,
-} from 'nodemailer';
+import { SES } from 'aws-sdk';
+import { Transporter, createTransport } from 'nodemailer';
+import { mailConfig } from 'src/config/mail.config';
 
 import { Inject, Injectable } from '@nestjs/common';
 
@@ -12,7 +9,7 @@ import { SendMailDto } from '../dtos/send-mail.dto';
 import { IMailProvider } from '../models/mail.provider';
 
 Injectable();
-export class EtherealMailProvider implements IMailProvider {
+export class SESMailProvider implements IMailProvider {
   private client: Transporter;
 
   constructor(
@@ -23,16 +20,11 @@ export class EtherealMailProvider implements IMailProvider {
   }
 
   private async start() {
-    const account = await createTestAccount();
-
     const transporter = createTransport({
-      host: account.smtp.host,
-      port: account.smtp.port,
-      secure: account.smtp.secure,
-      auth: {
-        user: account.user,
-        pass: account.pass,
-      },
+      SES: new SES({
+        apiVersion: '2010-12-01',
+        region: 'us-east-1',
+      }),
     });
 
     this.client = transporter;
@@ -44,12 +36,12 @@ export class EtherealMailProvider implements IMailProvider {
     from,
     templateData,
   }: SendMailDto): Promise<void> {
-    console.log('chegou no ethereal');
+    const { email, name } = mailConfig.defaults.from;
 
-    const message = await this.client.sendMail({
+    await this.client.sendMail({
       from: {
-        name: from?.name || 'Equipe Gobarber',
-        address: from?.email || 'equipe@gobarber.com.br',
+        name: from?.name || name,
+        address: from?.email || email,
       },
       to: {
         name: to.name,
@@ -58,8 +50,5 @@ export class EtherealMailProvider implements IMailProvider {
       subject,
       html: await this.mailTemplateProvider.parse(templateData),
     });
-
-    console.log('Message sent: %s', message.messageId);
-    console.log('Preview URL: %s', getTestMessageUrl(message));
   }
 }

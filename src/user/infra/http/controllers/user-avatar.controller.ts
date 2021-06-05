@@ -18,7 +18,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { UpdateAvatarService } from '../../../services/update-avatar.service';
 import { User } from '../../typeorm/entities/user.entity';
 
-@Controller('users')
+@Controller()
 export class UserAvatarController {
   constructor(private readonly updateAvatarService: UpdateAvatarService) {}
 
@@ -38,7 +38,6 @@ export class UserAvatarController {
   }
 
   @Get('avatar/:path')
-  @UseGuards(JwtAuthGuard)
   findOne(@Param('path') pathImage: string, @Res() res): any {
     return res.sendFile(pathImage, { root: uploadConfig.uploadsFolder });
   }

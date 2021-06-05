@@ -1,3 +1,4 @@
+import { classToClass } from 'class-transformer';
 import { IStorageProvider } from 'src/shared/providers/storageProvider/models/storage.provider';
 
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
@@ -33,8 +34,6 @@ export class UpdateAvatarService {
 
     await this.userRepository.save(user);
 
-    delete user.password;
-
-    return user;
+    return classToClass(user);
   }
 }

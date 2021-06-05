@@ -1,3 +1,4 @@
+import { Exclude, Expose } from 'class-transformer';
 import {
   Column,
   CreateDateColumn,
@@ -5,6 +6,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
+import { ConfigService } from '@nestjs/config';
+
+const configService = new ConfigService();
 
 @Entity('users')
 export class User {
@@ -18,6 +23,7 @@ export class User {
   email: string;
 
   @Column()
+  @Exclude()
   password: string;
 
   @Column({ nullable: true })
@@ -28,4 +34,11 @@ export class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @Expose({ name: 'avatarUrl' })
+  getAvatarUrl(): string {
+    return this.avatar
+      ? `${configService.get('APP_API_URL')}/avatar/${this.avatar}`
+      : null;
+  }
 }

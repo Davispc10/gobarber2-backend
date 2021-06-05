@@ -1,3 +1,4 @@
+import { classToClass } from 'class-transformer';
 import { IGetUser } from 'src/session/interfaces/getUserDecorator.interface';
 import { GetUser } from 'src/session/user.decorator';
 import { JwtAuthGuard } from 'src/shared/infra/guards/jwt-auth.guard';
@@ -23,7 +24,7 @@ export class UserProfileController {
 
   @Get()
   show(@GetUser() { user }: IGetUser): User {
-    return user;
+    return classToClass(user);
   }
 
   @Put()
@@ -34,8 +35,6 @@ export class UserProfileController {
   ): Promise<User> {
     const userUpdated = await this.userService.update(user.id, updateUserDto);
 
-    delete userUpdated.password;
-
-    return userUpdated;
+    return classToClass(userUpdated);
   }
 }

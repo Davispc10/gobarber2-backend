@@ -5,7 +5,7 @@ import { resolve } from 'path';
 const tmpFolder = resolve('tmp');
 
 export const uploadConfig = {
-  tmpFolder: tmpFolder,
+  tmpFolder,
   uploadsFolder: resolve(tmpFolder, 'uploads'),
 
   storage: diskStorage({

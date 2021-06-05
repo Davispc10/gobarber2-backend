@@ -1,3 +1,4 @@
+import { classToClass } from 'class-transformer';
 import { User } from 'src/user/infra/typeorm/entities/user.entity';
 import { IUserRepository } from 'src/user/interfaces/user.interface';
 import { IHashProvider } from 'src/user/providers/hashProvider/models/hash-provider';
@@ -50,8 +51,6 @@ export class SessionService {
       throw new UnauthorizedException('Incorrect email/password combination.');
     }
 
-    delete user.password;
-
-    return user;
+    return classToClass(user);
   }
 }

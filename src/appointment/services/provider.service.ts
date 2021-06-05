@@ -1,3 +1,4 @@
+import { classToClass } from 'class-transformer';
 import { User } from 'src/user/infra/typeorm/entities/user.entity';
 import { IUserRepository } from 'src/user/interfaces/user.interface';
 
@@ -11,16 +12,10 @@ export class ProviderService {
   ) {}
 
   async findAll(id: string): Promise<User[]> {
-    let users = await this.userRepository.findAllProviders({
+    const users = await this.userRepository.findAllProviders({
       exceptUserId: id,
     });
 
-    users = users.map((user) => {
-      delete user.password;
-
-      return user;
-    });
-
-    return users;
+    return users.map((user) => classToClass(user));
   }
 }

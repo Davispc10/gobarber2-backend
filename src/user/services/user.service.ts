@@ -1,3 +1,5 @@
+import { classToClass } from 'class-transformer';
+
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 
 import { CreateUserDto } from '../dtos/create-user.dto';
@@ -34,15 +36,9 @@ export class UserService {
   }
 
   async findAll(): Promise<User[]> {
-    let users = await this.userRepository.findAll();
+    const users = await this.userRepository.findAll();
 
-    users = users.map((user) => {
-      delete user.password;
-
-      return user;
-    });
-
-    return users;
+    return users.map((user) => classToClass(user));
   }
 
   async update(
@@ -83,6 +79,6 @@ export class UserService {
       user.password = await this.hashProvider.generateHash(password);
     }
 
-    return this.userRepository.save(user);
+    return await this.userRepository.save(user);
   }
 }

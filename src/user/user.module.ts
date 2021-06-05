@@ -1,3 +1,4 @@
+import { AppModule } from 'src/app.module';
 import { SharedModule } from 'src/shared/shared.module';
 import { InfraUserModule } from 'src/user/infra/typeorm/infra-user.module';
 
