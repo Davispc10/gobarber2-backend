@@ -1,4 +1,5 @@
 import { Exclude, Expose } from 'class-transformer';
+import { storageConfig } from 'src/config/storage.config';
 import {
   Column,
   CreateDateColumn,
@@ -37,8 +38,17 @@ export class User {
 
   @Expose({ name: 'avatarUrl' })
   getAvatarUrl(): string {
-    return this.avatar
-      ? `${configService.get('APP_API_URL')}/avatar/${this.avatar}`
-      : null;
+    if (!this.avatar) {
+      return null;
+    }
+
+    switch (storageConfig.driver) {
+      case 'disk':
+        return `${configService.get('APP_API_URL')}/avatar/${this.avatar}`;
+      case 's3':
+        return `https://${storageConfig.aws.bucket}.s3.amazonaws.com/${this.avatar}`;
+      default:
+        return null;
+    }
   }
 }

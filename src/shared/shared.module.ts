@@ -1,13 +1,12 @@
 import { mailConfig } from 'src/config/mail.config';
+import { storageConfig } from 'src/config/storage.config';
 
 import { Module } from '@nestjs/common';
 
 import { JwtStrategy } from './infra/strategies/jwt.strategy';
 import { mailProviders } from './providers/mailProvider';
-// import { EtherealMailProvider } from './providers/mailProvider/implementations/ethereal-mail.provider';
-// import { SESMailProvider } from './providers/mailProvider/implementations/ses-mail.provider';
 import { HandlebarsMailTemplateProvider } from './providers/mailTemplateProvider/implementations/handlebars-mail-template.provider';
-import { DiskStorageProvider } from './providers/storageProvider/implementations/disk-storage.provider';
+import { storageProviders } from './providers/storageProvider';
 
 @Module({
   imports: [],
@@ -16,7 +15,7 @@ import { DiskStorageProvider } from './providers/storageProvider/implementations
     JwtStrategy,
     {
       provide: 'IStorageProvider',
-      useClass: DiskStorageProvider,
+      useClass: storageProviders[storageConfig.driver],
     },
     {
       provide: 'IMailTemplateProvider',
