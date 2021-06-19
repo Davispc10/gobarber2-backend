@@ -1,3 +1,4 @@
+import { FakeCacheProvider } from 'src/shared/providers/cacheProvider/fakes/fake-cache.provider';
 import { FakeHashProvider } from 'src/user/providers/hashProvider/fakes/fake-hash.provider';
 import { UserService } from 'src/user/services/user.service';
 
@@ -7,6 +8,7 @@ import { FakeUserRepository } from '../fakes/fake-user.repository';
 
 let fakeUserRepository: FakeUserRepository;
 let fakeHashProvider: FakeHashProvider;
+let fakeCacheProvider: FakeCacheProvider;
 let userService: UserService;
 
 describe('UserService', () => {
@@ -14,7 +16,12 @@ describe('UserService', () => {
     beforeEach(() => {
       fakeUserRepository = new FakeUserRepository();
       fakeHashProvider = new FakeHashProvider();
-      userService = new UserService(fakeUserRepository, fakeHashProvider);
+      fakeCacheProvider = new FakeCacheProvider();
+      userService = new UserService(
+        fakeUserRepository,
+        fakeHashProvider,
+        fakeCacheProvider,
+      );
     });
 
     it('should be able to create a new user', async () => {
@@ -49,7 +56,12 @@ describe('UserService', () => {
     beforeEach(() => {
       fakeUserRepository = new FakeUserRepository();
       fakeHashProvider = new FakeHashProvider();
-      userService = new UserService(fakeUserRepository, fakeHashProvider);
+      fakeCacheProvider = new FakeCacheProvider();
+      userService = new UserService(
+        fakeUserRepository,
+        fakeHashProvider,
+        fakeCacheProvider,
+      );
     });
 
     it('should be able to update the profile', async () => {

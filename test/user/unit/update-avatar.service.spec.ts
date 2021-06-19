@@ -20,13 +20,13 @@ describe('UpdateUserAvatarService', () => {
       fakeDiskStorageProvider,
     );
 
-    const user = await fakeUserRepository.create({
+    let user = await fakeUserRepository.create({
       name: 'David',
       email: 'davi@gmail.com',
       password: '123456',
     });
 
-    await updateAvatarService.updateAvatar('avatar.jpg', user.id);
+    user = await updateAvatarService.updateAvatar('avatar.jpg', user.id);
 
     expect(user.avatar).toBe('avatar.jpg');
   });
@@ -50,7 +50,7 @@ describe('UpdateUserAvatarService', () => {
       fakeDiskStorageProvider,
     );
 
-    const user = await fakeUserRepository.create({
+    let user = await fakeUserRepository.create({
       name: 'David',
       email: 'davi@gmail.com',
       password: '123456',
@@ -58,7 +58,7 @@ describe('UpdateUserAvatarService', () => {
 
     await updateAvatarService.updateAvatar('avatar.jpg', user.id);
 
-    await updateAvatarService.updateAvatar('avatar2.jpg', user.id);
+    user = await updateAvatarService.updateAvatar('avatar2.jpg', user.id);
 
     expect(deleteFile).toHaveBeenCalledWith('avatar.jpg');
     expect(user.avatar).toBe('avatar2.jpg');

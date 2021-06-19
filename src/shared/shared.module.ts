@@ -1,9 +1,14 @@
+import { mailConfig } from 'src/config/mail.config';
+import { storageConfig } from 'src/config/storage.config';
+
 import { Module } from '@nestjs/common';
 
+import { cacheConfig } from '../config/cache.config';
 import { JwtStrategy } from './infra/strategies/jwt.strategy';
-import { EtherealMailProvider } from './providers/mailProvider/implementations/ethereal-mail.provider';
+import { cacheProviders } from './providers/cacheProvider';
+import { mailProviders } from './providers/mailProvider';
 import { HandlebarsMailTemplateProvider } from './providers/mailTemplateProvider/implementations/handlebars-mail-template.provider';
-import { DiskStorageProvider } from './providers/storageProvider/implementations/disk-storage.provider';
+import { storageProviders } from './providers/storageProvider';
 
 @Module({
   imports: [],
@@ -12,15 +17,19 @@ import { DiskStorageProvider } from './providers/storageProvider/implementations
     JwtStrategy,
     {
       provide: 'IStorageProvider',
-      useClass: DiskStorageProvider,
-    },
-    {
-      provide: 'IMailProvider',
-      useClass: EtherealMailProvider,
+      useClass: storageProviders[storageConfig.driver],
     },
     {
       provide: 'IMailTemplateProvider',
       useClass: HandlebarsMailTemplateProvider,
+    },
+    {
+      provide: 'IMailProvider',
+      useClass: mailProviders[mailConfig.driver],
+    },
+    {
+      provide: 'ICacheProvider',
+      useClass: cacheProviders[cacheConfig.driver],
     },
   ],
   exports: [
@@ -28,6 +37,7 @@ import { DiskStorageProvider } from './providers/storageProvider/implementations
     'IStorageProvider',
     'IMailProvider',
     'IMailTemplateProvider',
+    'ICacheProvider',
   ],
 })
 export class SharedModule {}

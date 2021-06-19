@@ -1,3 +1,5 @@
+import { Exclude, Expose } from 'class-transformer';
+import { storageConfig } from 'src/config/storage.config';
 import {
   Column,
   CreateDateColumn,
@@ -5,6 +7,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+
+import { ConfigService } from '@nestjs/config';
+
+const configService = new ConfigService();
 
 @Entity('users')
 export class User {
@@ -18,6 +24,7 @@ export class User {
   email: string;
 
   @Column()
+  @Exclude()
   password: string;
 
   @Column({ nullable: true })
@@ -28,4 +35,20 @@ export class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @Expose({ name: 'avatarUrl' })
+  getAvatarUrl(): string {
+    if (!this.avatar) {
+      return null;
+    }
+
+    switch (storageConfig.driver) {
+      case 'disk':
+        return `${configService.get('APP_API_URL')}/avatar/${this.avatar}`;
+      case 's3':
+        return `https://${storageConfig.aws.bucket}.s3.amazonaws.com/${this.avatar}`;
+      default:
+        return null;
+    }
+  }
 }

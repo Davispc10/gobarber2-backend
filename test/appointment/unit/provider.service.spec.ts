@@ -1,15 +1,22 @@
 import { ProviderService } from 'src/appointment/services/provider.service';
+import { FakeCacheProvider } from 'src/shared/providers/cacheProvider/fakes/fake-cache.provider';
 
 import { FakeUserRepository } from '../../user/fakes/fake-user.repository';
 
 let fakeUserRepository: FakeUserRepository;
+let fakeCacheProvider: FakeCacheProvider;
 let providerService: ProviderService;
 
 describe('ProfileService', () => {
   describe('ListAllProviders', () => {
     beforeEach(() => {
       fakeUserRepository = new FakeUserRepository();
-      providerService = new ProviderService(fakeUserRepository);
+      fakeCacheProvider = new FakeCacheProvider();
+
+      providerService = new ProviderService(
+        fakeUserRepository,
+        fakeCacheProvider,
+      );
     });
 
     it('should be able to list the providers', async () => {

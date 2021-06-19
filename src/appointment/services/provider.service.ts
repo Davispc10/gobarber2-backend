@@ -1,3 +1,5 @@
+import { classToClass } from 'class-transformer';
+import { ICacheProvider } from 'src/shared/providers/cacheProvider/models/cache.provider';
 import { User } from 'src/user/infra/typeorm/entities/user.entity';
 import { IUserRepository } from 'src/user/interfaces/user.interface';
 
@@ -8,19 +10,23 @@ export class ProviderService {
   constructor(
     @Inject('IUserRepository')
     private readonly userRepository: IUserRepository,
+    @Inject('ICacheProvider')
+    private readonly cacheProvider: ICacheProvider,
   ) {}
 
-  async findAll(id: string): Promise<User[]> {
-    let users = await this.userRepository.findAllProviders({
-      exceptUserId: id,
-    });
+  async findAll(userId: string): Promise<User[]> {
+    let users = await this.cacheProvider.recover<User[]>(
+      `providers-list:${userId}`,
+    );
 
-    users = users.map((user) => {
-      delete user.password;
+    if (!users) {
+      users = await this.userRepository.findAllProviders({
+        exceptUserId: userId,
+      });
 
-      return user;
-    });
+      await this.cacheProvider.save(`providers-list:${userId}`, users);
+    }
 
-    return users;
+    return users.map((user) => classToClass(user));
   }
 }

@@ -20,7 +20,7 @@ import { SessionService } from './session.service';
       useFactory: async (configService: ConfigService) => ({
         secret: configService.get('SECRET_KEY'),
         signOptions: {
-          expiresIn: '1d',
+          expiresIn: configService.get('EXPIRES_IN'),
         },
       }),
       inject: [ConfigService],

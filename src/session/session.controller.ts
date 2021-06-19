@@ -17,8 +17,8 @@ export class SessionController {
   @Post()
   @UsePipes(ValidationPipe)
   async create(@Body() createSessionDto: CreateSessionDto): Promise<IJwtToken> {
-    const token = await this.sessionService.create(createSessionDto);
+    const userToken = await this.sessionService.create(createSessionDto);
 
-    return token;
+    return userToken;
   }
 }

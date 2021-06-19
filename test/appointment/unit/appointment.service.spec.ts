@@ -1,4 +1,5 @@
 import { AppointmentService } from 'src/appointment/services/appointment.service';
+import { FakeCacheProvider } from 'src/shared/providers/cacheProvider/fakes/fake-cache.provider';
 
 import { BadRequestException } from '@nestjs/common';
 
@@ -7,16 +8,19 @@ import { FakeAppointmentRepository } from '../fakes/fake-appointment.repository'
 
 let fakeAppointmentRepository: FakeAppointmentRepository;
 let fakeNotificationRepository: FakeNotificationRepository;
+let fakeCacheProvider: FakeCacheProvider;
 let appointmentService: AppointmentService;
 
 describe('AppointmentService', () => {
   beforeEach(() => {
     fakeAppointmentRepository = new FakeAppointmentRepository();
     fakeNotificationRepository = new FakeNotificationRepository();
+    fakeCacheProvider = new FakeCacheProvider();
 
     appointmentService = new AppointmentService(
       fakeAppointmentRepository,
       fakeNotificationRepository,
+      fakeCacheProvider,
     );
   });
 

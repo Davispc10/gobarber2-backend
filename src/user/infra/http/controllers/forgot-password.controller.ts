@@ -21,7 +21,6 @@ export class ForgotPasswordController {
     @Body() { email }: ForgotPasswordDto,
     @Res() res: Response,
   ): Promise<Response> {
-    console.log(email);
     await this.emailService.sendForgotPasswordEmail({ email });
 
     return res.status(204).json();
