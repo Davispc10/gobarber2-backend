@@ -1,3 +1,4 @@
+import { classToClass } from 'class-transformer';
 import { CreateUserDto } from 'src/user/dtos/create-user.dto';
 import { FindAllProvidersDto } from 'src/user/dtos/find-providers.dto';
 import { User } from 'src/user/infra/typeorm/entities/user.entity';
@@ -38,7 +39,7 @@ export class FakeUserRepository implements IUserRepository {
 
     this.users.push(user);
 
-    return user;
+    return classToClass(user);
   }
 
   public async save(user: User): Promise<User> {

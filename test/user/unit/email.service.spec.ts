@@ -2,6 +2,7 @@ import { FakeMailProvider } from 'src/shared/providers/mailProvider/fakes/fake-m
 import { EmailService } from 'src/user/services/email.service';
 
 import { BadRequestException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 import { FakeUserTokensRepository } from '../fakes/fake-user-tokens.repository';
 import { FakeUserRepository } from '../fakes/fake-user.repository';
@@ -10,6 +11,7 @@ let fakeUserRepository: FakeUserRepository;
 let fakeMailProvider: FakeMailProvider;
 let fakeUserTokensRepository: FakeUserTokensRepository;
 let emailService: EmailService;
+let configService: ConfigService;
 
 describe('EmailService', () => {
   describe('SendForgotPasswordEmail', () => {
@@ -17,11 +19,13 @@ describe('EmailService', () => {
       fakeUserRepository = new FakeUserRepository();
       fakeMailProvider = new FakeMailProvider();
       fakeUserTokensRepository = new FakeUserTokensRepository();
+      configService = new ConfigService();
 
       emailService = new EmailService(
         fakeUserRepository,
         fakeMailProvider,
         fakeUserTokensRepository,
+        configService,
       );
     });
 

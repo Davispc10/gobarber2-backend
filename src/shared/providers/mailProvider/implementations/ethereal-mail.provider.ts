@@ -44,8 +44,6 @@ export class EtherealMailProvider implements IMailProvider {
     from,
     templateData,
   }: SendMailDto): Promise<void> {
-    console.log('chegou no ethereal');
-
     const message = await this.client.sendMail({
       from: {
         name: from?.name || 'Equipe Gobarber',

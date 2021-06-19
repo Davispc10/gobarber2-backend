@@ -1,4 +1,5 @@
 import { classToClass } from 'class-transformer';
+import { ICacheProvider } from 'src/shared/providers/cacheProvider/models/cache.provider';
 
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 
@@ -15,6 +16,8 @@ export class UserService {
     private readonly userRepository: IUserRepository,
     @Inject('IHashProvider')
     private hashProvider: IHashProvider,
+    @Inject('ICacheProvider')
+    private readonly cacheProvider: ICacheProvider,
   ) {}
 
   async create({ email, name, password }: CreateUserDto): Promise<User> {
@@ -31,6 +34,8 @@ export class UserService {
       email,
       password: hashedPassword,
     });
+
+    await this.cacheProvider.invalidatePrefix('providers-list');
 
     return user;
   }

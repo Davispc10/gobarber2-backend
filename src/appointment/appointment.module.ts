@@ -1,4 +1,5 @@
 import { InfraNotificationModule } from 'src/notification/infra/typeorm/infra-notification.module';
+import { SharedModule } from 'src/shared/shared.module';
 import { InfraUserModule } from 'src/user/infra/typeorm/infra-user.module';
 
 import { Module } from '@nestjs/common';
@@ -12,7 +13,12 @@ import { ProviderAvailabilityService } from './services/provider-availability.se
 import { ProviderService } from './services/provider.service';
 
 @Module({
-  imports: [InfraAppointmentModule, InfraUserModule, InfraNotificationModule],
+  imports: [
+    InfraAppointmentModule,
+    InfraUserModule,
+    InfraNotificationModule,
+    SharedModule,
+  ],
   controllers: [
     AppointmentController,
     ProviderController,

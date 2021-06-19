@@ -1,5 +1,7 @@
 import { format, getHours, isBefore, startOfHour } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 import { INotificationRepository } from 'src/notification/interfaces/notification.interface';
+import { ICacheProvider } from 'src/shared/providers/cacheProvider/models/cache.provider';
 
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 
@@ -18,6 +20,8 @@ export class AppointmentService {
     private readonly appointmentRepository: IAppointmentRepository,
     @Inject('INotificationRepository')
     private readonly notificationRepository: INotificationRepository,
+    @Inject('ICacheProvider')
+    private readonly cacheProvider: ICacheProvider,
   ) {}
 
   public async create({
@@ -59,12 +63,23 @@ export class AppointmentService {
       date: appointmentDate,
     });
 
-    const dateFormatted = format(appointmentDate, "dd/MM/yyyy 'ás' HH:mm'h'");
+    const dateFormatted = format(
+      appointmentDate,
+      "dd 'de' MMMM 'ás' HH:mm'h'",
+      { locale: ptBR },
+    );
 
     await this.notificationRepository.create({
       recipientId: providerId,
       content: `Novo agendamento para dia ${dateFormatted}`,
     });
+
+    await this.cacheProvider.invalidate(
+      `provider-appointments:${providerId}:${format(
+        appointmentDate,
+        'yyyy-M-d',
+      )}`,
+    );
 
     return appointment;
   }
@@ -75,14 +90,22 @@ export class AppointmentService {
     month,
     year,
   }: IAppointmentByProvider): Promise<Appointment[]> {
-    const appointments = await this.appointmentRepository.findAllInDayFromProvider(
-      {
+    const cacheKey = `provider-appointments:${providerId}:${year}-${month}-${day}`;
+
+    let appointments = await this.cacheProvider.recover<Appointment[]>(
+      cacheKey,
+    );
+
+    if (!appointments) {
+      appointments = await this.appointmentRepository.findAllInDayFromProvider({
         providerId,
         day,
         month,
         year,
-      },
-    );
+      });
+
+      await this.cacheProvider.save(cacheKey, appointments);
+    }
 
     return appointments;
   }

@@ -33,8 +33,8 @@ export class EmailService {
     const { token } = await this.userTokenRepository.generate(user.id);
 
     const forgotPasswordTemplate = resolve(
-      'src',
-      'user',
+      __dirname,
+      '..',
       'views',
       'forgot-password.hbs',
     );

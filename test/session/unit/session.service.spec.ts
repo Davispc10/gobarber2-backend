@@ -1,4 +1,5 @@
 import { SessionService } from 'src/session/session.service';
+import { FakeCacheProvider } from 'src/shared/providers/cacheProvider/fakes/fake-cache.provider';
 import { FakeHashProvider } from 'src/user/providers/hashProvider/fakes/fake-hash.provider';
 import { UserService } from 'src/user/services/user.service';
 
@@ -12,7 +13,6 @@ let fakeUserRepository: FakeUserRepository;
 let fakeConfigService: FakeConfigService;
 let fakeJwtService: FakeJwtService;
 let fakeHashProvider: FakeHashProvider;
-let userService: UserService;
 let sessionService: SessionService;
 
 describe('SessionService', () => {
@@ -28,7 +28,6 @@ describe('SessionService', () => {
       });
       fakeHashProvider = new FakeHashProvider();
 
-      userService = new UserService(fakeUserRepository, fakeHashProvider);
       sessionService = new SessionService(
         fakeUserRepository,
         fakeJwtService,
@@ -38,7 +37,7 @@ describe('SessionService', () => {
     });
 
     it('should be able to authenticate', async () => {
-      const user = await userService.create({
+      const user = await fakeUserRepository.create({
         name: 'David',
         email: 'davi@gmail.com',
         password: '123456',
@@ -63,7 +62,7 @@ describe('SessionService', () => {
     });
 
     it('should not be able to authenticate with wrong password', async () => {
-      await userService.create({
+      await fakeUserRepository.create({
         name: 'David',
         email: 'davi@gmail.com',
         password: '123456',
