@@ -1,7 +1,8 @@
 import { ObjectID } from 'mongodb';
-import { CreateNotificationDto } from 'src/notification/dtos/create-notification.dto';
-import { Notification } from 'src/notification/infra/typeorm/schemas/notification.schema';
-import { INotificationRepository } from 'src/notification/interfaces/notification.interface';
+
+import { CreateNotificationDto } from '@notification/dtos/create-notification.dto';
+import { Notification } from '@notification/infra/typeorm/schemas/notification.schema';
+import { INotificationRepository } from '@notification/interfaces/notification.interface';
 
 export class FakeNotificationRepository implements INotificationRepository {
   private notifications: Notification[] = [];

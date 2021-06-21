@@ -1,9 +1,6 @@
-import { SessionService } from 'src/session/session.service';
-import { FakeCacheProvider } from 'src/shared/providers/cacheProvider/fakes/fake-cache.provider';
-import { FakeHashProvider } from 'src/user/providers/hashProvider/fakes/fake-hash.provider';
-import { UserService } from 'src/user/services/user.service';
-
 import { UnauthorizedException } from '@nestjs/common';
+import { SessionService } from '@session/session.service';
+import { FakeHashProvider } from '@user/providers/hashProvider/fakes/fake-hash.provider';
 
 import { FakeUserRepository } from '../../user/fakes/fake-user.repository';
 import { FakeConfigService } from '../fakes/fake-config.service';

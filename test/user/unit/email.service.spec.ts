@@ -1,8 +1,7 @@
-import { FakeMailProvider } from 'src/shared/providers/mailProvider/fakes/fake-mail.provider';
-import { EmailService } from 'src/user/services/email.service';
-
 import { BadRequestException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { FakeMailProvider } from '@shared/providers/mailProvider/fakes/fake-mail.provider';
+import { EmailService } from '@user/services/email.service';
 
 import { FakeUserTokensRepository } from '../fakes/fake-user-tokens.repository';
 import { FakeUserRepository } from '../fakes/fake-user.repository';

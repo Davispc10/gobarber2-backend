@@ -1,9 +1,9 @@
 import { S3 } from 'aws-sdk';
 import { promises } from 'fs';
 import { resolve } from 'path';
-import { storageConfig } from 'src/config/storage.config';
-import { uploadConfig } from 'src/config/upload.config';
 
+import { storageConfig } from '@config/storage.config';
+import { uploadConfig } from '@config/upload.config';
 import { BadRequestException } from '@nestjs/common';
 
 import { IStorageProvider } from '../models/storage.provider';

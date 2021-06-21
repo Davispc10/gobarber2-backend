@@ -1,6 +1,5 @@
-import { mailConfig } from 'src/config/mail.config';
-import { storageConfig } from 'src/config/storage.config';
-
+import { mailConfig } from '@config/mail.config';
+import { storageConfig } from '@config/storage.config';
 import { Module } from '@nestjs/common';
 
 import { cacheConfig } from '../config/cache.config';

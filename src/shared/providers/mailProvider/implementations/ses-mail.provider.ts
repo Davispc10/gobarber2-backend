@@ -1,7 +1,7 @@
 import { SES } from 'aws-sdk';
 import { Transporter, createTransport } from 'nodemailer';
-import { mailConfig } from 'src/config/mail.config';
 
+import { mailConfig } from '@config/mail.config';
 import { Inject, Injectable } from '@nestjs/common';
 
 import { IMailTemplateProvider } from '../../mailTemplateProvider/models/mail-template.provider';

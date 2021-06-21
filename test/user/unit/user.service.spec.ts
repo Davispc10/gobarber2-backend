@@ -1,8 +1,7 @@
-import { FakeCacheProvider } from 'src/shared/providers/cacheProvider/fakes/fake-cache.provider';
-import { FakeHashProvider } from 'src/user/providers/hashProvider/fakes/fake-hash.provider';
-import { UserService } from 'src/user/services/user.service';
-
 import { BadRequestException } from '@nestjs/common';
+import { FakeCacheProvider } from '@shared/providers/cacheProvider/fakes/fake-cache.provider';
+import { FakeHashProvider } from '@user/providers/hashProvider/fakes/fake-hash.provider';
+import { UserService } from '@user/services/user.service';
 
 import { FakeUserRepository } from '../fakes/fake-user.repository';
 

@@ -1,11 +1,11 @@
-import { FindAllInDayFromProviderDto } from 'src/appointment/dtos/find-all-in-day-from-provider.dto';
-import { FindAllInMonthFromProviderDto } from 'src/appointment/dtos/find-all-in-month-from-provider.dto';
+import { Raw, Repository } from 'typeorm';
+
+import { FindAllInDayFromProviderDto } from '@appointment/dtos/find-all-in-day-from-provider.dto';
+import { FindAllInMonthFromProviderDto } from '@appointment/dtos/find-all-in-month-from-provider.dto';
 import {
   IAppointmentCreate,
   IAppointmentRepository,
-} from 'src/appointment/interfaces/appointment.interface';
-import { Raw, Repository } from 'typeorm';
-
+} from '@appointment/interfaces/appointment.interface';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 

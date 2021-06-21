@@ -1,6 +1,7 @@
-import { UserToken } from 'src/user/infra/typeorm/entities/user-token.entity';
-import { IUserTokensRepository } from 'src/user/interfaces/user.interface';
 import { v4 as uuidv4 } from 'uuid';
+
+import { UserToken } from '@user/infra/typeorm/entities/user-token.entity';
+import { IUserTokensRepository } from '@user/interfaces/user.interface';
 
 export class FakeUserTokensRepository implements IUserTokensRepository {
   private userTokens: UserToken[] = [];

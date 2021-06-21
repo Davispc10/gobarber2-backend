@@ -1,9 +1,10 @@
 import { classToClass } from 'class-transformer';
-import { CreateUserDto } from 'src/user/dtos/create-user.dto';
-import { FindAllProvidersDto } from 'src/user/dtos/find-providers.dto';
-import { User } from 'src/user/infra/typeorm/entities/user.entity';
-import { IUserRepository } from 'src/user/interfaces/user.interface';
 import { v4 as uuidv4 } from 'uuid';
+
+import { CreateUserDto } from '@user/dtos/create-user.dto';
+import { FindAllProvidersDto } from '@user/dtos/find-providers.dto';
+import { User } from '@user/infra/typeorm/entities/user.entity';
+import { IUserRepository } from '@user/interfaces/user.interface';
 
 export class FakeUserRepository implements IUserRepository {
   private users: User[] = [];

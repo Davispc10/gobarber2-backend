@@ -1,6 +1,7 @@
 import { promises } from 'fs';
 import { resolve } from 'path';
-import { uploadConfig } from 'src/config/upload.config';
+
+import { uploadConfig } from '@config/upload.config';
 
 import { IStorageProvider } from '../models/storage.provider';
 

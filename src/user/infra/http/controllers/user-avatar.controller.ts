@@ -1,8 +1,4 @@
-import { uploadConfig } from 'src/config/upload.config';
-import { IGetUser } from 'src/session/interfaces/getUserDecorator.interface';
-import { GetUser } from 'src/session/user.decorator';
-import { JwtAuthGuard } from 'src/shared/infra/guards/jwt-auth.guard';
-
+import { uploadConfig } from '@config/upload.config';
 import {
   Controller,
   Get,
@@ -14,6 +10,9 @@ import {
   Res,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { IGetUser } from '@session/interfaces/getUserDecorator.interface';
+import { GetUser } from '@session/user.decorator';
+import { JwtAuthGuard } from '@shared/infra/guards/jwt-auth.guard';
 
 import { UpdateAvatarService } from '../../../services/update-avatar.service';
 import { User } from '../../typeorm/entities/user.entity';

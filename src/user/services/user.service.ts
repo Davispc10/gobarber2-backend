@@ -1,7 +1,7 @@
 import { classToClass } from 'class-transformer';
-import { ICacheProvider } from 'src/shared/providers/cacheProvider/models/cache.provider';
 
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { ICacheProvider } from '@shared/providers/cacheProvider/models/cache.provider';
 
 import { CreateUserDto } from '../dtos/create-user.dto';
 import { UpdateUserDto } from '../dtos/update-user.dto';

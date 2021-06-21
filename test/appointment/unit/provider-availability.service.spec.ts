@@ -1,4 +1,4 @@
-import { ProviderAvailabilityService } from 'src/appointment/services/provider-availability.service';
+import { ProviderAvailabilityService } from '@appointment/services/provider-availability.service';
 
 import { FakeAppointmentRepository } from '../fakes/fake-appointment.repository';
 

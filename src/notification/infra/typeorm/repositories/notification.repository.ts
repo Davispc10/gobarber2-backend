@@ -1,9 +1,9 @@
-import { CreateNotificationDto } from 'src/notification/dtos/create-notification.dto';
-import { INotificationRepository } from 'src/notification/interfaces/notification.interface';
 import { MongoRepository } from 'typeorm';
 
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CreateNotificationDto } from '@notification/dtos/create-notification.dto';
+import { INotificationRepository } from '@notification/interfaces/notification.interface';
 
 import { Notification } from '../schemas/notification.schema';
 

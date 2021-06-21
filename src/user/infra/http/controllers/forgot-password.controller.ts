@@ -1,6 +1,4 @@
 import { Response } from 'express';
-import { ForgotPasswordDto } from 'src/user/dtos/forgot-password.dto';
-import { EmailService } from 'src/user/services/email.service';
 
 import {
   Controller,
@@ -10,6 +8,8 @@ import {
   Res,
   Body,
 } from '@nestjs/common';
+import { ForgotPasswordDto } from '@user/dtos/forgot-password.dto';
+import { EmailService } from '@user/services/email.service';
 
 @Controller('password')
 export class ForgotPasswordController {

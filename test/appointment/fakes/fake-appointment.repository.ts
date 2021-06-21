@@ -1,12 +1,13 @@
 import { getDate, getMonth, getYear, isEqual } from 'date-fns';
-import { FindAllInDayFromProviderDto } from 'src/appointment/dtos/find-all-in-day-from-provider.dto';
-import { FindAllInMonthFromProviderDto } from 'src/appointment/dtos/find-all-in-month-from-provider.dto';
-import { Appointment } from 'src/appointment/infra/typeorm/entities/appointment.entity';
+import { v4 as uuidv4 } from 'uuid';
+
+import { FindAllInDayFromProviderDto } from '@appointment/dtos/find-all-in-day-from-provider.dto';
+import { FindAllInMonthFromProviderDto } from '@appointment/dtos/find-all-in-month-from-provider.dto';
+import { Appointment } from '@appointment/infra/typeorm/entities/appointment.entity';
 import {
   IAppointmentCreate,
   IAppointmentRepository,
-} from 'src/appointment/interfaces/appointment.interface';
-import { v4 as uuidv4 } from 'uuid';
+} from '@appointment/interfaces/appointment.interface';
 
 export class FakeAppointmentRepository implements IAppointmentRepository {
   private appointments: Appointment[] = [];
