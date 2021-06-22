@@ -45,6 +45,7 @@ export const options: TypeOrmModuleOptions[] = [
     host: configService.get('MONGO_HOST'),
     port: configService.get('MONGO_PORT'),
     database: configService.get('MONGO_DBNAME'),
+    username: configService.get('MONGO_USERNAME'),
     useUnifiedTopology: true,
     entities: [join(__dirname, '..', '**', 'schemas', '*.schema.{ts,js}')],
   },

@@ -17,7 +17,7 @@ export const mailConfig = {
   driver: configService.get('MAIL_DRIVER') || 'ses',
   defaults: {
     from: {
-      email: 'oi@davidazeredo.tech',
+      email: configService.get('MAIL_ADDRESS'),
       name: 'Oi',
     },
   },
