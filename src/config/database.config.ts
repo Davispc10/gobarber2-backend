@@ -13,7 +13,7 @@ export const options: TypeOrmModuleOptions[] = [
     username: configService.get('DB_USERNAME'),
     password: configService.get('DB_PASSWORD'),
     database: configService.get('DB_DBNAME'),
-    entities: [join(__dirname, '**', '*.entity.{ts,js}')],
+    entities: [join(__dirname, '..', '**', '*.entity.{ts,js}')],
     logging: false,
     synchronize: false,
     // migrationsRun: true,
@@ -25,7 +25,7 @@ export const options: TypeOrmModuleOptions[] = [
         'infra',
         'typeorm',
         'migrations',
-        '*.ts',
+        '*.{ts,js}',
       ),
     ],
     cli: {
