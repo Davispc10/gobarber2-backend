@@ -15,20 +15,20 @@ import { storageProviders } from './providers/storageProvider';
   providers: [
     JwtStrategy,
     {
-      provide: 'IStorageProvider',
-      useClass: storageProviders[storageConfig.driver],
-    },
-    {
       provide: 'IMailTemplateProvider',
       useClass: HandlebarsMailTemplateProvider,
     },
     {
       provide: 'IMailProvider',
-      useClass: mailProviders[mailConfig.driver],
+      useClass: mailProviders[mailConfig().driver],
     },
     {
       provide: 'ICacheProvider',
-      useClass: cacheProviders[cacheConfig.driver],
+      useClass: cacheProviders[cacheConfig().driver],
+    },
+    {
+      provide: 'IStorageProvider',
+      useClass: storageProviders[storageConfig().driver],
     },
   ],
   exports: [

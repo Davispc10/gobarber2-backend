@@ -5,6 +5,7 @@ import {
   getTestMessageUrl,
 } from 'nodemailer';
 
+import { mailConfig } from '@config/mail.config';
 import { Inject, Injectable } from '@nestjs/common';
 
 import { IMailTemplateProvider } from '../../mailTemplateProvider/models/mail-template.provider';
@@ -44,6 +45,9 @@ export class EtherealMailProvider implements IMailProvider {
     from,
     templateData,
   }: SendMailDto): Promise<void> {
+    console.log('opaa etherealllllllllllllllllllllll');
+    console.log(from);
+    console.log(mailConfig().defaults.from);
     const message = await this.client.sendMail({
       from: {
         name: from?.name || 'Equipe Gobarber',

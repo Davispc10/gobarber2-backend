@@ -13,12 +13,14 @@ interface IMailConfig {
 
 const configService = new ConfigService();
 
-export const mailConfig = {
-  driver: configService.get('MAIL_DRIVER') || 'ses',
-  defaults: {
-    from: {
-      email: configService.get('MAIL_ADDRESS'),
-      name: 'Oi',
+export const mailConfig = () =>
+  ({
+    driver: configService.get('MAIL_DRIVER') || 'ethereal',
+
+    defaults: {
+      from: {
+        email: process.env.MAIL_ADDRESS,
+        name: 'Oi',
+      },
     },
-  },
-} as IMailConfig;
+  } as IMailConfig);

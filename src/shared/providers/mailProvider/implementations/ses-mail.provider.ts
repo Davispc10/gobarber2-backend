@@ -36,8 +36,11 @@ export class SESMailProvider implements IMailProvider {
     from,
     templateData,
   }: SendMailDto): Promise<void> {
-    const { email, name } = mailConfig.defaults.from;
+    console.log('opaa sessssssssssssssssss');
 
+    const { email, name } = mailConfig().defaults.from;
+
+    console.log('999999999999999999999');
     await this.client.sendMail({
       from: {
         name: from?.name || name,

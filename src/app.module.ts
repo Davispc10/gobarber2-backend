@@ -1,5 +1,8 @@
 import { join, resolve } from 'path';
 
+import { cacheConfig } from '@config/cache.config';
+import { mailConfig } from '@config/mail.config';
+import { storageConfig } from '@config/storage.config';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
@@ -21,7 +24,7 @@ const configService = new ConfigService();
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: ['.env'],
+      load: [mailConfig, cacheConfig],
     }),
     ThrottlerModule.forRoot({
       ttl: 1,

@@ -18,6 +18,8 @@ export class S3StorageProvider implements IStorageProvider {
   }
 
   public async saveFile(file: string): Promise<string> {
+    console.log('s3s3s3s3s3s3s3s3s3s3s');
+
     const originalPath = resolve(uploadConfig.tmpFolder, file);
 
     const ContentType = originalPath.split('.').pop();
@@ -30,7 +32,7 @@ export class S3StorageProvider implements IStorageProvider {
 
     await this.client
       .putObject({
-        Bucket: storageConfig.aws.bucket,
+        Bucket: storageConfig().aws.bucket,
         Key: file,
         ACL: 'public-read',
         Body: fileContent,
