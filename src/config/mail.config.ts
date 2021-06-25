@@ -11,15 +11,15 @@ interface IMailConfig {
   };
 }
 
-const configService = new ConfigService();
+// const configService = new ConfigService();
 
-export const mailConfig = () =>
+export const mailConfig = (configService) =>
   ({
     driver: configService.get('MAIL_DRIVER') || 'ethereal',
 
     defaults: {
       from: {
-        email: process.env.MAIL_ADDRESS,
+        email: configService.get('MAIL_ADDRESS'),
         name: 'Oi',
       },
     },

@@ -1,7 +1,5 @@
 import { RedisOptions } from 'ioredis';
 
-import { ConfigService } from '@nestjs/config';
-
 interface ICacheConfig {
   driver: 'redis';
 
@@ -10,17 +8,15 @@ interface ICacheConfig {
   };
 }
 
-const configService = new ConfigService();
-
 export const cacheConfig = () =>
   ({
     driver: 'redis',
 
     config: {
       redis: {
-        host: configService.get('REDIS_HOST'),
-        port: parseInt(configService.get('REDIS_PORT')) || 61379,
-        password: configService.get('REDIS_PASS'),
+        host: process.env.REDIS_HOST,
+        port: parseInt(process.env.REDIS_PORT) || 61379,
+        password: process.env.REDIS_PASS,
       },
     },
   } as ICacheConfig);

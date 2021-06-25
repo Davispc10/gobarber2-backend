@@ -1,11 +1,11 @@
 import { join, resolve } from 'path';
 
-import { ConfigService } from '@nestjs/config';
+// import { ConfigService, ConfigModuleOptions } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
-const configService = new ConfigService();
+// const configService = new ConfigService();
 
-export const options: TypeOrmModuleOptions[] = [
+export const ormConfig = (configService): TypeOrmModuleOptions[] => [
   {
     type: 'postgres',
     host: configService.get('DB_HOST'),

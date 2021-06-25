@@ -1,6 +1,7 @@
 import { mailConfig } from '@config/mail.config';
 import { storageConfig } from '@config/storage.config';
 import { Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 import { cacheConfig } from '../config/cache.config';
 import { JwtStrategy } from './infra/strategies/jwt.strategy';
@@ -20,7 +21,10 @@ import { storageProviders } from './providers/storageProvider';
     },
     {
       provide: 'IMailProvider',
-      useClass: mailProviders[mailConfig().driver],
+      // useClass: mailProviders[mailConfig().driver],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) =>
+        mailProviders[mailConfig(configService).driver],
     },
     {
       provide: 'ICacheProvider',
