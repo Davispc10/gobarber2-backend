@@ -5,15 +5,11 @@ import {
   getTestMessageUrl,
 } from 'nodemailer';
 
-import { mailConfig } from '@config/mail.config';
 import { Inject, Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 
 import { IMailTemplateProvider } from '../../mailTemplateProvider/models/mail-template.provider';
 import { SendMailDto } from '../dtos/send-mail.dto';
 import { IMailProvider } from '../models/mail.provider';
-
-const configService = new ConfigService();
 
 Injectable();
 export class EtherealMailProvider implements IMailProvider {
@@ -48,9 +44,8 @@ export class EtherealMailProvider implements IMailProvider {
     from,
     templateData,
   }: SendMailDto): Promise<void> {
-    console.log('opaa etherealllllllllllllllllllllll');
-    console.log(from);
-    console.log(mailConfig(configService).defaults.from);
+    console.log('etherealllllllllllllllllllllll');
+
     const message = await this.client.sendMail({
       from: {
         name: from?.name || 'Equipe Gobarber',

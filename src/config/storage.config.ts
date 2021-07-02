@@ -5,10 +5,9 @@ interface IStorageConfig {
   };
 }
 
-export const storageConfig = () =>
-  ({
-    driver: process.env.STORAGE_DRIVER || 's3',
-    aws: {
-      bucket: 'gobarber-david-s3',
-    },
-  } as IStorageConfig);
+export const storageConfig = {
+  driver: process.env.STORAGE_DRIVER || 's3',
+  aws: {
+    bucket: 'gobarber-david-s3',
+  },
+} as IStorageConfig;

@@ -21,8 +21,8 @@ const configService = new ConfigService();
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      load: [cacheConfig, storageConfig],
       envFilePath: '.env',
+      load: [cacheConfig],
     }),
     ThrottlerModule.forRoot({
       ttl: 1,

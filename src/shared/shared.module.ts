@@ -21,18 +21,31 @@ import { storageProviders } from './providers/storageProvider';
     },
     {
       provide: 'IMailProvider',
-      // useClass: mailProviders[mailConfig().driver],
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService) =>
-        mailProviders[mailConfig(configService).driver],
+      useClass: mailProviders.ses,
+      // inject: [ConfigService],
+      // useFactory: (configService: ConfigService) => {
+      //   console.log(configService.get('MAIL_DRIVER'));
+      //   return new mailProviders[
+      //     configService.get('MAIL_DRIVER') || 'ethereal'
+      //   ]();
+      // },
     },
     {
       provide: 'ICacheProvider',
       useClass: cacheProviders[cacheConfig().driver],
+      // useFactory: (configService: ConfigService) => {
+      //   return new cacheProviders[cacheConfig().driver]();
+      // },
+      // inject: [ConfigService],
     },
     {
       provide: 'IStorageProvider',
-      useClass: storageProviders[storageConfig().driver],
+      useFactory: (configService: ConfigService) => {
+        return new storageProviders[
+          configService.get('STORAGE_DRIVER') || 'disk'
+        ]();
+      },
+      inject: [ConfigService],
     },
   ],
   exports: [

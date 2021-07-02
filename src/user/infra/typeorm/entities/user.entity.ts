@@ -42,13 +42,11 @@ export class User {
       return null;
     }
 
-    switch (storageConfig().driver) {
+    switch (storageConfig.driver) {
       case 'disk':
         return `${configService.get('APP_API_URL')}/avatar/${this.avatar}`;
       case 's3':
-        return `https://${storageConfig().aws.bucket}.s3.amazonaws.com/${
-          this.avatar
-        }`;
+        return `https://${storageConfig.aws.bucket}.s3.amazonaws.com/${this.avatar}`;
       default:
         return null;
     }

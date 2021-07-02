@@ -1,5 +1,3 @@
-import { ConfigService } from '@nestjs/config';
-
 interface IMailConfig {
   driver: 'ethereal' | 'ses';
 
@@ -11,16 +9,13 @@ interface IMailConfig {
   };
 }
 
-// const configService = new ConfigService();
+export const mailConfig = {
+  driver: process.env.MAIL_DRIVER || 'ethereal',
 
-export const mailConfig = (configService) =>
-  ({
-    driver: configService.get('MAIL_DRIVER') || 'ethereal',
-
-    defaults: {
-      from: {
-        email: configService.get('MAIL_ADDRESS'),
-        name: 'Oi',
-      },
+  defaults: {
+    from: {
+      email: 'oi@davidazeredo.tech',
+      name: 'Oi',
     },
-  } as IMailConfig);
+  },
+} as IMailConfig;

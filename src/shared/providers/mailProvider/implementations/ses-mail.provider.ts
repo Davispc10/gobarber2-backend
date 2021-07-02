@@ -3,13 +3,10 @@ import { Transporter, createTransport } from 'nodemailer';
 
 import { mailConfig } from '@config/mail.config';
 import { Inject, Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 
 import { IMailTemplateProvider } from '../../mailTemplateProvider/models/mail-template.provider';
 import { SendMailDto } from '../dtos/send-mail.dto';
 import { IMailProvider } from '../models/mail.provider';
-
-const configService = new ConfigService();
 
 Injectable();
 export class SESMailProvider implements IMailProvider {
@@ -39,11 +36,10 @@ export class SESMailProvider implements IMailProvider {
     from,
     templateData,
   }: SendMailDto): Promise<void> {
-    console.log('opaa sessssssssssssssssss');
+    console.log('ses');
 
-    const { email, name } = mailConfig(configService).defaults.from;
+    const { email, name } = mailConfig.defaults.from;
 
-    console.log('999999999999999999999');
     await this.client.sendMail({
       from: {
         name: from?.name || name,
