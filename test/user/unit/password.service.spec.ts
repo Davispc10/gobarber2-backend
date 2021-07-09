@@ -1,7 +1,6 @@
-import { FakeHashProvider } from 'src/user/providers/hashProvider/fakes/fake-hash.provider';
-import { PasswordService } from 'src/user/services/password.service';
-
 import { BadRequestException } from '@nestjs/common';
+import { FakeHashProvider } from '@user/providers/hashProvider/fakes/fake-hash.provider';
+import { PasswordService } from '@user/services/password.service';
 
 import { FakeUserTokensRepository } from '../fakes/fake-user-tokens.repository';
 import { FakeUserRepository } from '../fakes/fake-user.repository';

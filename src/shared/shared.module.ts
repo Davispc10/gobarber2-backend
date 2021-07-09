@@ -1,7 +1,7 @@
-import { mailConfig } from 'src/config/mail.config';
-import { storageConfig } from 'src/config/storage.config';
-
+import { mailConfig } from '@config/mail.config';
+import { storageConfig } from '@config/storage.config';
 import { Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
 import { cacheConfig } from '../config/cache.config';
 import { JwtStrategy } from './infra/strategies/jwt.strategy';
@@ -16,20 +16,36 @@ import { storageProviders } from './providers/storageProvider';
   providers: [
     JwtStrategy,
     {
-      provide: 'IStorageProvider',
-      useClass: storageProviders[storageConfig.driver],
-    },
-    {
       provide: 'IMailTemplateProvider',
       useClass: HandlebarsMailTemplateProvider,
     },
     {
       provide: 'IMailProvider',
-      useClass: mailProviders[mailConfig.driver],
+      useClass: mailProviders.ses,
+      // inject: [ConfigService],
+      // useFactory: (configService: ConfigService) => {
+      //   console.log(configService.get('MAIL_DRIVER'));
+      //   return new mailProviders[
+      //     configService.get('MAIL_DRIVER') || 'ethereal'
+      //   ]();
+      // },
     },
     {
       provide: 'ICacheProvider',
-      useClass: cacheProviders[cacheConfig.driver],
+      useClass: cacheProviders[cacheConfig().driver],
+      // useFactory: (configService: ConfigService) => {
+      //   return new cacheProviders[cacheConfig().driver]();
+      // },
+      // inject: [ConfigService],
+    },
+    {
+      provide: 'IStorageProvider',
+      useFactory: (configService: ConfigService) => {
+        return new storageProviders[
+          configService.get('STORAGE_DRIVER') || 'disk'
+        ]();
+      },
+      inject: [ConfigService],
     },
   ],
   exports: [

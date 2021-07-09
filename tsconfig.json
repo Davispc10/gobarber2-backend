@@ -6,10 +6,21 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true
+    "rootDir": "./",
+    "baseUrl": "./src",
+    "incremental": true,
+    "esModuleInterop": true,
+    "paths": {
+      "@appointment/*": ["appointment/*"],
+      "@config/*": ["config/*"],
+      "@notification/*": ["notification/*"],
+      "@session/*": ["session/*"],
+      "@shared/*": ["shared/*"],
+      "@user/*": ["user/*"]
+    }
   }
 }

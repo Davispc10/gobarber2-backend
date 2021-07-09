@@ -1,5 +1,6 @@
 import Redis, { Redis as RedisClient } from 'ioredis';
-import { cacheConfig } from 'src/config/cache.config';
+
+import { cacheConfig } from '@config/cache.config';
 
 import { ICacheProvider } from '../models/cache.provider';
 
@@ -7,7 +8,7 @@ export class RedisCacheProvider implements ICacheProvider {
   private client: RedisClient;
 
   constructor() {
-    this.client = new Redis(cacheConfig.config.redis);
+    this.client = new Redis(cacheConfig().config.redis);
   }
 
   public async save(key: string, value: any): Promise<void> {

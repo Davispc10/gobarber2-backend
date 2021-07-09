@@ -1,11 +1,11 @@
 import { classToClass } from 'class-transformer';
-import { User } from 'src/user/infra/typeorm/entities/user.entity';
-import { IUserRepository } from 'src/user/interfaces/user.interface';
-import { IHashProvider } from 'src/user/providers/hashProvider/models/hash-provider';
 
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { User } from '@user/infra/typeorm/entities/user.entity';
+import { IUserRepository } from '@user/interfaces/user.interface';
+import { IHashProvider } from '@user/providers/hashProvider/models/hash-provider';
 
 import { CreateSessionDto } from './dtos/create-session.dto';
 import { IJwtToken } from './interfaces/jwtPayload.interface';

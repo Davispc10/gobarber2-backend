@@ -1,8 +1,8 @@
 import { resolve } from 'path';
-import { IMailProvider } from 'src/shared/providers/mailProvider/models/mail.provider';
 
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { IMailProvider } from '@shared/providers/mailProvider/models/mail.provider';
 
 import { IMailRequest } from '../interfaces/mail.interface';
 import {

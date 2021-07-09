@@ -1,5 +1,3 @@
-import { join } from 'path';
-
 import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
@@ -15,11 +13,8 @@ async function bootstrap() {
   });
 
   app.useGlobalFilters(new AllExceptionsFilter());
-  app.useStaticAssets(join(__dirname, '..', 'public'));
-  app.setBaseViewsDir(join(__dirname, '..', 'views'));
-  app.setViewEngine('hbs');
 
-  await app.listen(configService.get<number>('PORT') || 3333);
+  await app.listen(configService.get<number>('PORT') || 3331);
   console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();

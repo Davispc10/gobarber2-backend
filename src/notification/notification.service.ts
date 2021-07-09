@@ -1,5 +1,4 @@
-import { IAppointmentRepository } from 'src/appointment/interfaces/appointment.interface';
-
+import { IAppointmentRepository } from '@appointment/interfaces/appointment.interface';
 import { Inject, Injectable } from '@nestjs/common';
 
 import { CreateNotificationDto } from './dtos/create-notification.dto';

@@ -1,9 +1,9 @@
 import { classToClass } from 'class-transformer';
-import { ICacheProvider } from 'src/shared/providers/cacheProvider/models/cache.provider';
-import { User } from 'src/user/infra/typeorm/entities/user.entity';
-import { IUserRepository } from 'src/user/interfaces/user.interface';
 
 import { Inject, Injectable } from '@nestjs/common';
+import { ICacheProvider } from '@shared/providers/cacheProvider/models/cache.provider';
+import { User } from '@user/infra/typeorm/entities/user.entity';
+import { IUserRepository } from '@user/interfaces/user.interface';
 
 @Injectable()
 export class ProviderService {

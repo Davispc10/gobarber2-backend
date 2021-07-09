@@ -1,5 +1,4 @@
-import { InfraAppointmentModule } from 'src/appointment/infra/typeorm/infra-appointment.module';
-
+import { InfraAppointmentModule } from '@appointment/infra/typeorm/infra-appointment.module';
 import { Module } from '@nestjs/common';
 
 import { InfraNotificationModule } from './infra/typeorm/infra-notification.module';

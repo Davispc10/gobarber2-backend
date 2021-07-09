@@ -1,9 +1,9 @@
 import { S3 } from 'aws-sdk';
 import { promises } from 'fs';
 import { resolve } from 'path';
-import { storageConfig } from 'src/config/storage.config';
-import { uploadConfig } from 'src/config/upload.config';
 
+import { storageConfig } from '@config/storage.config';
+import { uploadConfig } from '@config/upload.config';
 import { BadRequestException } from '@nestjs/common';
 
 import { IStorageProvider } from '../models/storage.provider';
@@ -18,6 +18,8 @@ export class S3StorageProvider implements IStorageProvider {
   }
 
   public async saveFile(file: string): Promise<string> {
+    console.log('s3s3s3s3s3s3s3s3s3s3s');
+
     const originalPath = resolve(uploadConfig.tmpFolder, file);
 
     const ContentType = originalPath.split('.').pop();

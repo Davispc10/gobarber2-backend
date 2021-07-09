@@ -1,7 +1,7 @@
 import { classToClass } from 'class-transformer';
-import { IStorageProvider } from 'src/shared/providers/storageProvider/models/storage.provider';
 
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { IStorageProvider } from '@shared/providers/storageProvider/models/storage.provider';
 
 import { User } from '../infra/typeorm/entities/user.entity';
 import { IUserRepository } from '../interfaces/user.interface';

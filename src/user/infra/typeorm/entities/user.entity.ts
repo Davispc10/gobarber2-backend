@@ -1,5 +1,4 @@
 import { Exclude, Expose } from 'class-transformer';
-import { storageConfig } from 'src/config/storage.config';
 import {
   Column,
   CreateDateColumn,
@@ -8,6 +7,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
+import { storageConfig } from '@config/storage.config';
 import { ConfigService } from '@nestjs/config';
 
 const configService = new ConfigService();

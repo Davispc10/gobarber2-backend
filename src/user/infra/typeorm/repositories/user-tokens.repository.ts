@@ -1,8 +1,8 @@
-import { IUserTokensRepository } from 'src/user/interfaces/user.interface';
 import { Repository } from 'typeorm';
 
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { IUserTokensRepository } from '@user/interfaces/user.interface';
 
 import { UserToken } from '../entities/user-token.entity';
 

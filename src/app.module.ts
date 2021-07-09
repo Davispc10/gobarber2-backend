@@ -1,5 +1,8 @@
 import { join, resolve } from 'path';
 
+import { cacheConfig } from '@config/cache.config';
+import { mailConfig } from '@config/mail.config';
+import { storageConfig } from '@config/storage.config';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
@@ -7,21 +10,19 @@ import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppointmentModule } from './appointment/appointment.module';
-import { options } from './config/database.config';
-import { portConfig } from './config/port.config';
 import { NotificationModule } from './notification/notification.module';
 import { SessionModule } from './session/session.module';
 import { SharedModule } from './shared/shared.module';
 import { UserModule } from './user/user.module';
 
-const [, mongoConfig] = options;
+const configService = new ConfigService();
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      // load: [portConfig],
-      envFilePath: ['.env'],
+      envFilePath: '.env',
+      load: [cacheConfig],
     }),
     ThrottlerModule.forRoot({
       ttl: 1,
@@ -62,12 +63,22 @@ const [, mongoConfig] = options;
       }),
       inject: [ConfigService],
     }),
-    TypeOrmModule.forRoot(mongoConfig),
+    TypeOrmModule.forRoot({
+      name: 'mongo',
+      type: 'mongodb',
+      host: configService.get('MONGO_HOST'),
+      port: configService.get('MONGO_PORT'),
+      database: configService.get('MONGO_DBNAME'),
+      username: configService.get('MONGO_USERNAME'),
+      password: configService.get('MONGO_PASSWORD'),
+      useUnifiedTopology: true,
+      entities: [join(__dirname, '**', 'schemas', '*.schema.{ts,js}')],
+    }),
+    NotificationModule,
     UserModule,
     AppointmentModule,
     SessionModule,
     SharedModule,
-    NotificationModule,
   ],
   controllers: [],
   providers: [

@@ -1,7 +1,6 @@
-import { AppointmentService } from 'src/appointment/services/appointment.service';
-import { FakeCacheProvider } from 'src/shared/providers/cacheProvider/fakes/fake-cache.provider';
-
+import { AppointmentService } from '@appointment/services/appointment.service';
 import { BadRequestException } from '@nestjs/common';
+import { FakeCacheProvider } from '@shared/providers/cacheProvider/fakes/fake-cache.provider';
 
 import { FakeNotificationRepository } from '../../notification/fakes/fake-notification.repository';
 import { FakeAppointmentRepository } from '../fakes/fake-appointment.repository';

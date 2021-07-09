@@ -1,4 +1,4 @@
-import { User } from 'src/user/infra/typeorm/entities/user.entity';
+import { User } from '@user/infra/typeorm/entities/user.entity';
 
 export interface IGetUser {
   user: User;

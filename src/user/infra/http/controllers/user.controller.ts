@@ -1,5 +1,3 @@
-import { JwtAuthGuard } from 'src/shared/infra/guards/jwt-auth.guard';
-
 import {
   Controller,
   Get,
@@ -9,6 +7,7 @@ import {
   UsePipes,
   UseGuards,
 } from '@nestjs/common';
+import { JwtAuthGuard } from '@shared/infra/guards/jwt-auth.guard';
 
 import { CreateUserDto } from '../../../dtos/create-user.dto';
 import { UserService } from '../../../services/user.service';

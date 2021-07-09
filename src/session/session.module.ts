@@ -1,11 +1,10 @@
-import { JwtStrategy } from 'src/shared/infra/strategies/jwt.strategy';
-import { InfraUserModule } from 'src/user/infra/typeorm/infra-user.module';
-import { HashProviderModule } from 'src/user/providers/hash-provider.module';
-
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
+import { JwtStrategy } from '@shared/infra/strategies/jwt.strategy';
+import { InfraUserModule } from '@user/infra/typeorm/infra-user.module';
+import { HashProviderModule } from '@user/providers/hash-provider.module';
 
 import { SessionController } from './session.controller';
 import { SessionService } from './session.service';

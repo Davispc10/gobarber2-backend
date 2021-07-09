@@ -1,7 +1,4 @@
 import { classToClass } from 'class-transformer';
-import { IGetUser } from 'src/session/interfaces/getUserDecorator.interface';
-import { GetUser } from 'src/session/user.decorator';
-import { JwtAuthGuard } from 'src/shared/infra/guards/jwt-auth.guard';
 
 import {
   Controller,
@@ -12,6 +9,9 @@ import {
   UseGuards,
   Get,
 } from '@nestjs/common';
+import { IGetUser } from '@session/interfaces/getUserDecorator.interface';
+import { GetUser } from '@session/user.decorator';
+import { JwtAuthGuard } from '@shared/infra/guards/jwt-auth.guard';
 
 import { UpdateUserDto } from '../../../dtos/update-user.dto';
 import { UserService } from '../../../services/user.service';

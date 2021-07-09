@@ -1,9 +1,6 @@
 import { parseISO } from 'date-fns';
-import { AppointmentByProviderDto } from 'src/appointment/dtos/find-all-by-provider.dto';
-import { GetUser } from 'src/session/user.decorator';
-import { JwtAuthGuard } from 'src/shared/infra/guards/jwt-auth.guard';
-import { User } from 'src/user/infra/typeorm/entities/user.entity';
 
+import { AppointmentByProviderDto } from '@appointment/dtos/find-all-by-provider.dto';
 import {
   Controller,
   Get,
@@ -16,6 +13,9 @@ import {
   ValidationPipe,
   UseGuards,
 } from '@nestjs/common';
+import { GetUser } from '@session/user.decorator';
+import { JwtAuthGuard } from '@shared/infra/guards/jwt-auth.guard';
+import { User } from '@user/infra/typeorm/entities/user.entity';
 
 import { CreateAppointmentDto } from '../../../dtos/create-appointment.dto';
 import { UpdateAppointmentDto } from '../../../dtos/update-appointment.dto';

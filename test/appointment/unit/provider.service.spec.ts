@@ -1,5 +1,5 @@
-import { ProviderService } from 'src/appointment/services/provider.service';
-import { FakeCacheProvider } from 'src/shared/providers/cacheProvider/fakes/fake-cache.provider';
+import { ProviderService } from '@appointment/services/provider.service';
+import { FakeCacheProvider } from '@shared/providers/cacheProvider/fakes/fake-cache.provider';
 
 import { FakeUserRepository } from '../../user/fakes/fake-user.repository';
 

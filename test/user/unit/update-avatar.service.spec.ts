@@ -1,7 +1,6 @@
-import { FakeStorageProvider } from 'src/shared/providers/storageProvider/fakes/fake-storage.provider';
-import { UpdateAvatarService } from 'src/user/services/update-avatar.service';
-
 import { BadRequestException } from '@nestjs/common';
+import { FakeStorageProvider } from '@shared/providers/storageProvider/fakes/fake-storage.provider';
+import { UpdateAvatarService } from '@user/services/update-avatar.service';
 
 import { FakeUserRepository } from '../fakes/fake-user.repository';
 

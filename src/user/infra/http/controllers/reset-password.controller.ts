@@ -1,6 +1,4 @@
 import { Response } from 'express';
-import { ResetPasswordDto } from 'src/user/dtos/reset-password.dto';
-import { PasswordService } from 'src/user/services/password.service';
 
 import {
   Controller,
@@ -10,6 +8,8 @@ import {
   Res,
   Body,
 } from '@nestjs/common';
+import { ResetPasswordDto } from '@user/dtos/reset-password.dto';
+import { PasswordService } from '@user/services/password.service';
 
 @Controller('password')
 export class ResetPasswordController {

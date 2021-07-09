@@ -1,7 +1,7 @@
 import { IsNotEmpty, IsOptional, IsString, ValidateIf } from 'class-validator';
-import { Match } from 'src/shared/decorators/match-password.decorator';
 
 import { PartialType } from '@nestjs/mapped-types';
+import { Match } from '@shared/decorators/match-password.decorator';
 
 import { CreateUserDto } from './create-user.dto';
 

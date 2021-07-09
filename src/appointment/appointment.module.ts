@@ -1,8 +1,7 @@
-import { InfraNotificationModule } from 'src/notification/infra/typeorm/infra-notification.module';
-import { SharedModule } from 'src/shared/shared.module';
-import { InfraUserModule } from 'src/user/infra/typeorm/infra-user.module';
-
 import { Module } from '@nestjs/common';
+import { InfraNotificationModule } from '@notification/infra/typeorm/infra-notification.module';
+import { SharedModule } from '@shared/shared.module';
+import { InfraUserModule } from '@user/infra/typeorm/infra-user.module';
 
 import { AppointmentController } from './infra/http/controllers/appointment.controller';
 import { ProviderAvailabilityController } from './infra/http/controllers/provider-availability.controller';

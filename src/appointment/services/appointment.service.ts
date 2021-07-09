@@ -1,9 +1,9 @@
 import { format, getHours, isBefore, startOfHour } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import { INotificationRepository } from 'src/notification/interfaces/notification.interface';
-import { ICacheProvider } from 'src/shared/providers/cacheProvider/models/cache.provider';
 
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { INotificationRepository } from '@notification/interfaces/notification.interface';
+import { ICacheProvider } from '@shared/providers/cacheProvider/models/cache.provider';
 
 import { UpdateAppointmentDto } from '../dtos/update-appointment.dto';
 import { Appointment } from '../infra/typeorm/entities/appointment.entity';

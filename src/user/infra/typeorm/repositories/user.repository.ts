@@ -1,10 +1,10 @@
-import { CreateUserDto } from 'src/user/dtos/create-user.dto';
-import { FindAllProvidersDto } from 'src/user/dtos/find-providers.dto';
-import { IUserRepository } from 'src/user/interfaces/user.interface';
 import { Not, Repository } from 'typeorm';
 
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { CreateUserDto } from '@user/dtos/create-user.dto';
+import { FindAllProvidersDto } from '@user/dtos/find-providers.dto';
+import { IUserRepository } from '@user/interfaces/user.interface';
 
 import { User } from '../entities/user.entity';
 
